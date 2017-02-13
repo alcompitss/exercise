@@ -1,1 +1,64 @@
 <p>This is the partial for view 1.</p>
+<div ng-controller="View1Ctrl">
+    <table class="table table-bordered">
+        <tr style="background-color:darkcyan;color: floralwhite;font-style: bold;" align="center">
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>JobTitle</td>
+        </tr>
+        <tr ng-repeat="person in persons track by $index" ng-click="populatePerson(person)" data-toggle="modal" data-target="#myModal">
+            <td>{{person.FirstName}}</td>
+            <td>{{person.LastName}}</td>
+            <td>{{person.JobTitle}}</td>
+        </tr>
+    </table>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Person Info</h4>
+                </div>
+                
+                    <div class="modal-body">
+                        <input type="hidden" ng-value="UserCode" />
+                        <form name="myForm">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <div class="input-group" ng-class="{'has-error has-feedback': myForm.firstName.$invalid}">
+                                        <span class="input-group-addon">First Name</span>
+                                        <input type="text" name="firstName" ng-model="FirstName" class="form-control" placeholder="First Name" required/>
+                                        <span ng-class="{'glyphicon glyphicon-remove form-control-feedback': myForm.firstName.$invalid}"></span>
+                                        <!--<span ng-show="myForm.firstName.$touched && myForm.firstName.$invalid">The name is required.</span>-->
+                                    </div>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="input-group" ng-class="{'has-error has-feedback': myForm.lastName.$invalid}">
+                                        <span class="input-group-addon">Last Name</span>
+                                        <input type="text" name="lastName" ng-model="LastName" class="form-control" placeholder="Last Name" required>
+                                        <span ng-class="{'glyphicon glyphicon-remove form-control-feedback': myForm.lastName.$invalid}"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="input-group" ng-class="{'has-error has-feedback': myForm.jobTitle.$invalid}">
+                                        <span class="input-group-addon">Job Title&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        <input type="text" name="jobTitle" ng-model="JobTitle" class="form-control" placeholder="Job Title" required>
+                                        <span ng-class="{'glyphicon glyphicon-remove form-control-feedback':myForm.jobTitle.$invalid}"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                         </form>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-default" id="updatePerson" ng-click="((myForm.firstName.$invalid) || (myForm.lastName.$invalid) || (myForm.jobTitle.$invalid)) ? '' : updatePerson()">Update</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
